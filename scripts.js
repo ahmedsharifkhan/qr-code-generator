@@ -5,25 +5,28 @@ $(document).ready(function () {
         const type = $("#type").val();
         const firstName = $("#firstName").val() || '';
         const lastName = $("#lastName").val() || '';
+        const companyName = $("#companyName").val() || '';
+        const designation = $("#designation").val() || '';
         const phoneNumber = $("#phoneNumber").val() || '';
         const email = $("#email").val() || '';
         const url = $("#url").val() || '';
+        const socialMedia = $("#socialMedia").val() || '';
         const address = $("#address").val() || '';
-        const designation = $("#designation").val() || '';
+        const note = $("#note").val() || '';
 
         let qrContent = "";
 
         if (type === "vCard") {
-            qrContent = `BEGIN:VCARD\nVERSION:3.0\nN:${lastName};${firstName}\nFN:${firstName} ${lastName}\nTITLE:${designation}\nTEL:${phoneNumber}\nEMAIL:${email}\nURL:${url}\nADR:${address}\nEND:VCARD`;
+            qrContent = `BEGIN:VCARD\nVERSION:3.0\nN:${lastName};${firstName}\nFN:${firstName} ${lastName}\nORG:${companyName}\nTITLE:${designation}\nTEL:${phoneNumber}\nEMAIL:${email}\nURL:${url}\nURL:${socialMedia}\nADR:${address}\nNOTE:${note}\nEND:VCARD`;
         } else if (type === "MeCard") {
-            qrContent = `MECARD:N:${lastName},${firstName};TEL:${phoneNumber};EMAIL:${email};URL:${url};ADR:${address};NOTE:${designation};;`;
+            qrContent = `MECARD:N:${lastName},${firstName};ORG:${companyName};TITLE:${designation};TEL:${phoneNumber};EMAIL:${email};URL:${url};URL:${socialMedia};ADR:${address};NOTE:${note};;`;
         }
 
         // Clear previous QR code
         $("#qrcode").empty();
 
         // Generate new QR code
-        const qrcode = new QRCode(document.getElementById("qrcode"), {
+        new QRCode(document.getElementById("qrcode"), {
             text: qrContent,
             width: 256,
             height: 256
@@ -41,11 +44,13 @@ $(document).ready(function () {
 
 function downloadQRCode() {
     const canvas = document.querySelector("#qrcode canvas");
-    const url = canvas.toDataURL("image/png");
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "qrcode.png";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    if (canvas) {
+        const url = canvas.toDataURL("image/png");
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "qrcode.png";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
 }

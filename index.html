@@ -11,7 +11,7 @@
     <div class="container">
         <h1 class="text-center my-4">Free QR Code Generator</h1>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <form id="qrForm" class="mb-4">
                     <div class="form-group">
                         <label for="type">Choose Type</label>
@@ -30,6 +30,14 @@
                             <input type="text" class="form-control" id="lastName">
                         </div>
                         <div class="form-group">
+                            <label for="companyName">Company Name</label>
+                            <input type="text" class="form-control" id="companyName">
+                        </div>
+                        <div class="form-group">
+                            <label for="designation">Designation</label>
+                            <input type="text" class="form-control" id="designation">
+                        </div>
+                        <div class="form-group">
                             <label for="phoneNumber">Phone Number</label>
                             <input type="text" class="form-control" id="phoneNumber">
                         </div>
@@ -38,22 +46,26 @@
                             <input type="email" class="form-control" id="email">
                         </div>
                         <div class="form-group">
-                            <label for="url">URL</label>
+                            <label for="url">Website</label>
                             <input type="url" class="form-control" id="url">
+                        </div>
+                        <div class="form-group">
+                            <label for="socialMedia">Social Media URL</label>
+                            <input type="url" class="form-control" id="socialMedia">
                         </div>
                         <div class="form-group">
                             <label for="address">Address</label>
                             <input type="text" class="form-control" id="address">
                         </div>
                         <div class="form-group">
-                            <label for="designation">Designation</label>
-                            <input type="text" class="form-control" id="designation">
+                            <label for="note">Additional Note</label>
+                            <input type="text" class="form-control" id="note">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Generate QR Code</button>
                 </form>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4 text-center" style="position: sticky;">
                 <div id="qrcode"></div>
                 <button id="downloadBtn" class="btn btn-success mt-3" style="display: none;">Download QR Code</button>
             </div>
