@@ -3,60 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>vCard QR Code Generator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        h1 {
-            text-align: center;
-        }
-        #qrcode {
-            margin: 20px auto;
-            display: block;
-        }
-    </style>
+    <title>QR Code Generator</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>vCard QR Code Generator</h1>
-    <div id="qrcode"></div>
+    <div class="container">
+        <h1 class="text-center my-4">Free QR Code Generator</h1>
+        <form id="qrForm" class="mb-4">
+            <div class="form-group">
+                <label for="type">Choose Type</label>
+                <select class="form-control" id="type">
+                    <option value="vCard">vCard</option>
+                    <option value="MeCard">MeCard</option>
+                </select>
+            </div>
+            <div id="vcard-fields">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName">
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input type="text" class="form-control" id="phoneNumber">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email">
+                </div>
+                <!-- Add more fields as needed -->
+            </div>
+            <button type="button" class="btn btn-primary" onclick="generateQRCode()">Generate QR Code</button>
+        </form>
+        <div class="text-center">
+            <div id="qrcode"></div>
+        </div>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
-    <script>
-        // Sample vCard data (replace with your own)
-        const vcardData = `
-            BEGIN:VCARD
-            VERSION:3.0
-            N:Doe;Jane;;;
-            FN:Jane Doe
-            ORG:Acme Inc.
-            TITLE:CEO
-            TEL;TYPE=WORK,VOICE:(555) 555-5555
-            TEL;TYPE=CELL,VOICE:(555) 555-1234
-            ADR;TYPE=WORK:;;1234 Elm Street;Hometown;ST;12345;USA
-            EMAIL:jane.doe@example.com
-            URL:http://www.acmeinc.com
-            END:VCARD
-        `;
-
-        // Function to generate QR code
-        function generateQRCode() {
-            const qrCodeDiv = document.getElementById('qrcode');
-            const qr = new QRCode(qrCodeDiv, {
-                text: vcardData.trim(),
-                width: 256,
-                height: 256,
-                colorDark: '#000000',
-                colorLight: '#ffffff',
-                correctLevel: QRCode.CorrectLevel.L // Error correction level
-            });
-        }
-
-        // Generate QR code on page load
-        document.addEventListener('DOMContentLoaded', generateQRCode);
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>
