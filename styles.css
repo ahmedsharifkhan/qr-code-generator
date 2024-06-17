@@ -9,3 +9,7 @@ h1 {
 #qrcode {
     margin-top: 20px;
 }
+
+#downloadBtn {
+    display: none;
+}
