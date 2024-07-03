@@ -1,56 +1,408 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Generator</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <title>Elite Able - QR Code Generator</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Elite Able Bootstrap admin template with a QR Code Generator feature." />
+    <meta name="keywords" content="QR Code Generator, admin templates, bootstrap admin templates, bootstrap 4, dashboard templates">
+    <meta name="author" content="Codedthemes" />
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="assets/images/favicon.png" type="image/x-icon">
+    <!-- fontawesome icon -->
+    <link rel="stylesheet" href="assets/fonts/fontawesome/css/fontawesome-all.min.css">
+    <!-- animation css -->
+    <link rel="stylesheet" href="assets/plugins/animation/css/animate.min.css">
+    <!-- vendor css -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Custom CSS -->
+    <style>
+        .left-side {
+            height: 100vh;
+            overflow-y: auto;
+            padding-right: 15px;
+        }
+        .right-side {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            padding-left: 15px;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1 class="text-center my-4">Free QR Code Generator</h1>
+    <div class="container-fluid mt-3">
         <div class="row">
-            <div class="col-md-6">
-                <form id="qrForm" class="mb-4">
-                    <div class="form-group">
-                        <label for="type">Choose Type</label>
-                        <select class="form-control" id="type" required>
-                            <option value="vCard">vCard</option>
-                            <option value="MeCard">MeCard</option>
-                            <option value="URL">URL</option>
-                            <option value="Text">Text</option>
-                            <option value="Email">Email</option>
-                            <option value="SMS">SMS</option>
-                            <option value="WIFI">WIFI</option>
-                            <option value="Bitcoin">Bitcoin</option>
-                            <option value="Twitter">Twitter</option>
-                            <option value="Facebook">Facebook</option>
-                            <option value="PDF">PDF</option>
-                            <option value="MP3">MP3</option>
-                            <option value="AppStores">App Stores</option>
-                            <option value="Images">Images</option>
-                            <option value="Barcodes">2D Barcodes</option>
-                        </select>
+            <div class="col-xl-12">
+                <div class="logo text-center my-5">
+                    <img src="#" alt="QR Code Maker" class="img-fluid">
+                </div>
+                <div class="tab-content shadow-none" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="upform" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <div class="row">
+                            <div class="col-lg-7 left-side">
+                                <div id="wizard_container">
+                                    <div id="top-wizard">
+                                        <div id="progressbar"></div>
+                                    </div>
+                                    <!-- /top-wizard -->
+                                    <form id="qrForm" method="POST" enctype="multipart/form-data">
+                                        <div id="middle-wizard">
+                                            <div class="step">
+                                                <h3 class="main_question"><strong></strong>Enter Your Details</h3>
+                                                <div class="form-group">
+                                                    <label for="type">Choose Type</label>
+                                                    <select class="form-control required" id="type" name="type">
+                                                        <option value="vCard">vCard</option>
+                                                        <option value="MeCard">MeCard</option>
+                                                        <option value="URL">URL</option>
+                                                        <option value="Text">Text</option>
+                                                        <option value="Email">Email</option>
+                                                        <option value="SMS">SMS</option>
+                                                        <option value="WIFI">WIFI</option>
+                                                        <option value="Bitcoin">Bitcoin</option>
+                                                        <option value="Twitter">Twitter</option>
+                                                        <option value="Facebook">Facebook</option>
+                                                        <option value="PDF">PDF</option>
+                                                        <option value="MP3">MP3</option>
+                                                        <option value="AppStores">App Stores</option>
+                                                        <option value="Images">Images</option>
+                                                        <option value="Barcodes">2D Barcodes</option>
+                                                    </select>
+                                                </div>
+                                                <div id="form-fields"></div>
+                                                <div class="form-group">
+                                                    <label for="qrColor">QR Code Color</label>
+                                                    <input type="color" class="form-control" id="qrColor" name="qrColor" value="#000000">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="imageUpload">Upload Image</label>
+                                                    <input type="file" class="form-control" id="imageUpload" name="imageUpload" accept="image/*">
+                                                </div>
+                                            </div>
+                                            <!-- /step-->
+                                        </div>
+                                        <!-- /middle-wizard -->
+                                        <div id="bottom-wizard">
+                                            <button type="submit" name="process" class="submit btn btn-primary">Generate</button>
+                                        </div>
+                                        <!-- /bottom-wizard -->
+                                    </form>
+                                </div>
+                                <!-- /Wizard container -->
+                            </div>
+                            
+                            <div class="col-lg-5 right-side text-center">
+                                <div id="left_form">
+                                    <figure>
+                                        <div id="qrcode"></div>
+                                    </figure>
+                                    <h2>QR Code Generator</h2>
+                                    <p>Create custom QR codes for various types of data including URLs, contact information, and more.</p>
+                                    <button id="downloadBtn" class="btn btn-success mt-3" style="display: none;">Download QR Code</button>
+                                </div>
+                            </div>
+                        </div><!-- /Row -->
                     </div>
-                    <div id="form-fields"></div>
-                    <div class="form-group">
-                        <label for="qrColor">QR Code Color</label>
-                        <input type="color" class="form-control" id="qrColor" value="#000000">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Generate QR Code</button>
-                </form>
-            </div>
-            <div class="col-md-6 text-center">
-                <div id="qrcode"></div>
-                <button id="downloadBtn" class="btn btn-success mt-3" style="display: none;">Download QR Code</button>
+                </div>
+                <div class="footer mt-5">
+                    <p class="text-center">Made with <i class="fas fa-heart"></i> by <a href="https://codedthemes.com/" target="_blank">Codedthemes</a></p>
+                </div>
             </div>
         </div>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Required Js -->
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script src="scripts.js"></script>
+    <script>
+        $(document).ready(function () {
+            const formFields = {
+                vCard: `
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" id="lastName">
+                    </div>
+                    <div class="form-group">
+                        <label for="companyName">Company Name</label>
+                        <input type="text" class="form-control" id="companyName">
+                    </div>
+                    <div class="form-group">
+                        <label for="designation">Designation</label>
+                        <input type="text" class="form-control" id="designation">
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumber">Phone Number</label>
+                        <input type="text" class="form-control" id="phoneNumber">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="url">Website</label>
+                        <input type="url" class="form-control" id="url">
+                    </div>
+                    <div class="form-group">
+                        <label for="socialMedia">Social Media URL</label>
+                        <input type="url" class="form-control" id="socialMedia">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" class="form-control" id="address">
+                    </div>
+                    <div class="form-group">
+                        <label for="note">Additional Note</label>
+                        <input type="text" class="form-control" id="note">
+                    </div>
+                `,
+                MeCard: `
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" id="lastName">
+                    </div>
+                    <div class="form-group">
+                        <label for="companyName">Company Name</label>
+                        <input type="text" class="form-control" id="companyName">
+                    </div>
+                    <div class="form-group">
+                        <label for="designation">Designation</label>
+                        <input type="text" class="form-control" id="designation">
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumber">Phone Number</label>
+                        <input type="text" class="form-control" id="phoneNumber">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="url">Website</label>
+                        <input type="url" class="form-control" id="url">
+                    </div>
+                    <div class="form-group">
+                        <label for="socialMedia">Social Media URL</label>
+                        <input type="url" class="form-control" id="socialMedia">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" class="form-control" id="address">
+                    </div>
+                    <div class="form-group">
+                        <label for="note">Additional Note</label>
+                        <input type="text" class="form-control" id="note">
+                    </div>
+                `,
+                URL: `
+                    <div class="form-group">
+                        <label for="url">URL</label>
+                        <input type="url" class="form-control" id="url">
+                    </div>
+                `,
+                Text: `
+                    <div class="form-group">
+                        <label for="text">Text</label>
+                        <input type="text" class="form-control" id="text">
+                    </div>
+                `,
+                Email: `
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" class="form-control" id="subject">
+                    </div>
+                    <div class="form-group">
+                        <label for="body">Body</label>
+                        <textarea class="form-control" id="body"></textarea>
+                    </div>
+                `,
+                SMS: `
+                    <div class="form-group">
+                        <label for="phoneNumber">Phone Number</label>
+                        <input type="text" class="form-control" id="phoneNumber">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea class="form-control" id="message"></textarea>
+                    </div>
+                `,
+                WIFI: `
+                    <div class="form-group">
+                        <label for="ssid">SSID</label>
+                        <input type="text" class="form-control" id="ssid">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="text" class="form-control" id="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="encryption">Encryption</label>
+                        <select class="form-control" id="encryption">
+                            <option value="WPA">WPA/WPA2</option>
+                            <option value="WEP">WEP</option>
+                            <option value="nopass">No Password</option>
+                        </select>
+                    </div>
+                `
+                // Add more form structures for other types
+            };
+
+            function updateFormFields(type) {
+                $("#form-fields").html(formFields[type] || '');
+            }
+
+            $("#type").change(function () {
+                const type = $(this).val();
+                updateFormFields(type);
+            });
+
+            // Initialize form with default fields
+            updateFormFields($("#type").val());
+
+            $("#qrForm").submit(function (event) {
+                event.preventDefault(); // Prevent form from submitting normally
+
+                const type = $("#type").val();
+                const qrColor = $("#qrColor").val();
+
+                let qrContent = "";
+                switch (type) {
+                    case "vCard":
+                        const firstName = $("#firstName").val() || '';
+                        const lastName = $("#lastName").val() || '';
+                        const companyName = $("#companyName").val() || '';
+                        const designation = $("#designation").val() || '';
+                        const phoneNumber = $("#phoneNumber").val() || '';
+                        const email = $("#email").val() || '';
+                        const url = $("#url").val() || '';
+                        const socialMedia = $("#socialMedia").val() || '';
+                        const address = $("#address").val() || '';
+                        const note = $("#note").val() || '';
+                        qrContent = `BEGIN:VCARD\nVERSION:3.0\nN:${lastName};${firstName}\nFN:${firstName} ${lastName}\nORG:${companyName}\nTITLE:${designation}\nTEL:${phoneNumber}\nEMAIL:${email}\nURL:${url}\nURL:${socialMedia}\nADR:${address}\nNOTE:${note}\nEND:VCARD`;
+                        break;
+                    case "MeCard":
+                        qrContent = `MECARD:N:${lastName},${firstName};ORG:${companyName};TITLE:${designation};TEL:${phoneNumber};EMAIL:${email};URL:${url};URL:${socialMedia};ADR:${address};NOTE:${note};;`;
+                        break;
+                    case "URL":
+                        qrContent = $("#url").val();
+                        break;
+                    case "Text":
+                        qrContent = $("#text").val();
+                        break;
+                    case "Email":
+                        const emailAddr = $("#email").val() || '';
+                        const subject = $("#subject").val() || '';
+                        const body = $("#body").val() || '';
+                        qrContent = `mailto:${emailAddr}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                        break;
+                    case "SMS":
+                        const smsNumber = $("#phoneNumber").val() || '';
+                        const message = $("#message").val() || '';
+                        qrContent = `SMSTO:${smsNumber}:${message}`;
+                        break;
+                    case "WIFI":
+                        const ssid = $("#ssid").val() || '';
+                        const password = $("#password").val() || '';
+                        const encryption = $("#encryption").val() || 'nopass';
+                        qrContent = `WIFI:S:${ssid};T:${encryption};P:${password};;`;
+                        break;
+                    // Add more cases for other types
+                }
+
+                // Check if an image is uploaded
+                const imageUpload = document.getElementById('imageUpload');
+                if (imageUpload.files && imageUpload.files[0]) {
+                    const file = imageUpload.files[0];
+                    uploadImage(file, function(imageUrl) {
+                        if (imageUrl) {
+                            qrContent += `\nIMAGE:${imageUrl}`;
+                            generateQRCode(qrContent, qrColor);
+                        }
+                    });
+                } else {
+                    generateQRCode(qrContent, qrColor);
+                }
+            });
+
+            function generateQRCode(qrContent, qrColor) {
+                // Clear previous QR code
+                $("#qrcode").empty();
+
+                // Generate new QR code
+                const qrCode = new QRCode(document.getElementById("qrcode"), {
+                    text: qrContent,
+                    width: 256,
+                    height: 256,
+                    colorDark: qrColor,
+                    colorLight: "#ffffff"
+                });
+
+                // Show download button
+                $("#downloadBtn").show();
+
+                // Download button functionality
+                $("#downloadBtn").off("click").on("click", function () {
+                    downloadQRCode();
+                });
+            }
+
+            function uploadImage(file, callback) {
+                const formData = new FormData();
+                formData.append('image', file);
+
+                $.ajax({
+                    url: 'https://api.imgur.com/3/image',
+                    type: 'POST',
+                    headers: {
+                        Authorization: 'Client-ID YOUR_IMGUR_CLIENT_ID'
+                    },
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        callback(response.data.link);
+                    },
+                    error: function() {
+                        alert('Image upload failed. Please try again.');
+                        callback(null);
+                    }
+                });
+            }
+
+            function downloadQRCode() {
+                const canvas = document.querySelector("#qrcode canvas");
+                if (canvas) {
+                    const url = canvas.toDataURL("image/png");
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = "qrcode.png";
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                }
+            }
+        });
+    </script>
+
 </body>
+
 </html>
