@@ -1,9 +1,3 @@
----
-layout: default
-
-title: Home
----
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,16 +74,13 @@ title: Home
                                                         <option value="AppStores">App Stores</option>
                                                         <option value="Images">Images</option>
                                                         <option value="Barcodes">2D Barcodes</option>
+                                                        <option value="WhatsApp">WhatsApp</option>
                                                     </select>
                                                 </div>
                                                 <div id="form-fields"></div>
                                                 <div class="form-group">
                                                     <label for="qrColor">QR Code Color</label>
                                                     <input type="color" class="form-control" id="qrColor" name="qrColor" value="#000000">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="imageUpload">Upload Image</label>
-                                                    <input type="file" class="form-control" id="imageUpload" name="imageUpload" accept="image/*">
                                                 </div>
                                             </div>
                                             <!-- /step-->
@@ -268,6 +259,12 @@ title: Home
                             <option value="nopass">No Password</option>
                         </select>
                     </div>
+                `,
+                WhatsApp: `
+                    <div class="form-group">
+                        <label for="whatsappNumber">WhatsApp Number</label>
+                        <input type="text" class="form-control" id="whatsappNumber" placeholder="e.g. +1234567890">
+                    </div>
                 `
                 // Add more form structures for other types
             };
@@ -331,22 +328,14 @@ title: Home
                         const encryption = $("#encryption").val() || 'nopass';
                         qrContent = `WIFI:S:${ssid};T:${encryption};P:${password};;`;
                         break;
+                    case "WhatsApp":
+                        const whatsappNumber = $("#whatsappNumber").val() || '';
+                        qrContent = `https://wa.me/${whatsappNumber}`;
+                        break;
                     // Add more cases for other types
                 }
 
-                // Check if an image is uploaded
-                const imageUpload = document.getElementById('imageUpload');
-                if (imageUpload.files && imageUpload.files[0]) {
-                    const file = imageUpload.files[0];
-                    uploadImage(file, function(imageUrl) {
-                        if (imageUrl) {
-                            qrContent += `\nIMAGE:${imageUrl}`;
-                            generateQRCode(qrContent, qrColor);
-                        }
-                    });
-                } else {
-                    generateQRCode(qrContent, qrColor);
-                }
+                generateQRCode(qrContent, qrColor);
             });
 
             function generateQRCode(qrContent, qrColor) {
@@ -368,29 +357,6 @@ title: Home
                 // Download button functionality
                 $("#downloadBtn").off("click").on("click", function () {
                     downloadQRCode();
-                });
-            }
-
-            function uploadImage(file, callback) {
-                const formData = new FormData();
-                formData.append('image', file);
-
-                $.ajax({
-                    url: 'https://api.imgur.com/3/image',
-                    type: 'POST',
-                    headers: {
-                        Authorization: 'Client-ID YOUR_IMGUR_CLIENT_ID'
-                    },
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        callback(response.data.link);
-                    },
-                    error: function() {
-                        alert('Image upload failed. Please try again.');
-                        callback(null);
-                    }
                 });
             }
 
