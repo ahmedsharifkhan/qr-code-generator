@@ -1,0 +1,24 @@
+brand:
+  name: "QR Code Generator"
+  logo: "assets/images/logo.png"
+  link: "/"
+links:
+  - name: "Home"
+    link: "/"
+  # - name: "About"
+  #   link: "/about"
+  - name: "Pricing"
+    link: "/pricing"
+  - name: "Contact"
+    link: "/contact"
+  # - name: "More"
+  #   dropdown: true
+  #   sublinks:
+  #     - name: "FAQ"
+  #       link: "##"
+  #     - name: "Support"
+  #       link: "##"
+mobile:
+  logo:
+    width: 30
+    height: 30

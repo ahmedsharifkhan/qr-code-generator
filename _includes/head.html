@@ -1,32 +1,84 @@
 <title>{{ site.title }}</title>
-    <!-- Meta -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="Elite Able Bootstrap admin template with a QR Code Generator feature." />
-    <meta name="keywords" content="QR Code Generator, admin templates, bootstrap admin templates, bootstrap 4, dashboard templates">
-    <meta name="author" content="Codedthemes" />
+<!-- Meta -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>{{ page.title | default: site.title }}</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="description" content="{{ page.description | default: site.description }}" />
+<meta name="keywords" content="{{ page.keywords | default: site.keywords }}">
+<meta name="author" content="{{ page.author | default: site.author }}" />
 
-    <!-- Favicon icon -->
-    <link rel="icon" href="{{ site.baseurl }}/assets/images/logo.png" type="image/x-icon">
-    <!-- fontawesome icon -->
-    <link rel="stylesheet" href="assets/fonts/fontawesome/css/fontawesome-all.min.css">
-    <!-- animation css -->
-    <link rel="stylesheet" href="assets/plugins/animation/css/animate.min.css">
-    <!-- vendor css -->
-    <link rel="stylesheet" href="assets/css/style.css">
+<!-- Favicon icon -->
+<link rel="icon" href="{{ site.baseurl }}/assets/images/logo.png" type="image/x-icon">
+<!-- fontawesome icon -->
+<link rel="stylesheet" href="{{ site.baseurl }}/assets/fonts/fontawesome/css/fontawesome-all.min.css">
+<!-- animation css -->
+<link rel="stylesheet" href="{{ site.baseurl }}/assets/plugins/animation/css/animate.min.css">
+<!-- vendor css -->
+<link rel="stylesheet" href="{{ site.baseurl }}/assets/css/style.css">
 
-    <!-- Custom CSS -->
-    <style>
-        .left-side {
-            height: 100vh;
-            overflow-y: auto;
-            padding-right: 15px;
-        }
-        .right-side {
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            padding-left: 15px;
-        }
-    </style>
+
+
+<!-- Custom CSS -->
+<style>
+    .left-side {
+        height: 100vh;
+        overflow-y: auto;
+        padding-right: 15px;
+    }
+
+    .right-side {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        padding-left: 15px;
+    }
+
+    .social-icons {
+    margin-top: 10px;
+}
+
+.social-icons a {
+    margin: 0 15px; /* Add spacing between icons */
+    text-decoration: none;
+    font-size: 1.5rem; /* Increase icon size */
+    color: #333; /* Default icon color */
+    transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+.social-icons a:hover {
+    color: #007bff; /* Default hover color */
+}
+
+.social-icons a[aria-label="Facebook"] {
+    color: #3b5998; /* Facebook color */
+}
+
+.social-icons a[aria-label="Twitter"] {
+    color: #1da1f2; /* Twitter color */
+}
+
+.social-icons a[aria-label="LinkedIn"] {
+    color: #0077b5; /* LinkedIn color */
+}
+
+.social-icons a[aria-label="Instagram"] {
+    color: #e4405f; /* Instagram color */
+}
+
+.social-icons a[aria-label="GitHub"] {
+    color: #333; /* GitHub color */
+}
+
+.social-icons a[aria-label="Facebook"]:hover,
+.social-icons a[aria-label="Twitter"]:hover,
+.social-icons a[aria-label="LinkedIn"]:hover,
+.social-icons a[aria-label="Instagram"]:hover,
+.social-icons a[aria-label="GitHub"]:hover {
+    color: #0056b3; /* Hover color for all icons */
+}
+
+</style>
